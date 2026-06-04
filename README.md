@@ -34,7 +34,7 @@ The evolution of this tool served as a practical lab to understand the differenc
 ## ⚙️ How to run it locally
 
 1. Clone this repository:
-   `git clone https://github.com/YOUR_USER/YOUR_REPOSITORY.git`
+   `git clone https://github.com/Tyr222/fast-mouse-autoclicker.git`
 2. Install the required dependencies:
    `pip install pyautogui pynput`
 3. Run the main file:
