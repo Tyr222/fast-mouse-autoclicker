@@ -6,6 +6,7 @@ import time
 from pynput import mouse, keyboard
 
 pyautogui.FAILSAFE = True
+pyautogui.PAUSE = 0  # default is 0.1s and caps click speed at ~10/sec
 root = Tk() #Janela
 root.title("Fast Mouse")
 root.geometry("500x300")
@@ -34,20 +35,30 @@ running = False
 total_sec = 0
 hotkey_atual = "f6" 
 
+def parse_interval(value):
+    return float(str(value).replace(",", "."))
+
 def start_clicking():
     global running, total_sec
     if running: return 
     running = True
-    total_sec = (float(hr_val.get())*3600) + (float(min_val.get())*60) + (float(sec_val.get())) + (float(mili_val.get())/1000)
+    total_sec = (
+        parse_interval(hr_val.get()) * 3600
+        + parse_interval(min_val.get()) * 60
+        + parse_interval(sec_val.get())
+        + parse_interval(mili_val.get()) / 1000
+    )
     thread = threading.Thread(target=loop_clicking, daemon=True)
     thread.start()
 
 def loop_clicking():
     while running:
         if Value1.get() == 0:
-            pyautogui.click(interval=total_sec)
-        elif Value1.get() == 1:
-            pyautogui.click(x=int(Entry_x.get()) , y=int(Entry_y.get()), interval=total_sec)
+            pyautogui.click()
+        else:
+            pyautogui.click(x=int(Entry_x.get()), y=int(Entry_y.get()))
+        if total_sec > 0:
+            time.sleep(total_sec)
 
 def stop_cliking():
     global running
@@ -135,7 +146,7 @@ Entry_sec.grid(column=4, row=0)
 ttk.Label(frm, text="Seconds").grid(column=5, row=0)
 Entry_milisec = ttk.Entry(frm, width=10, justify="left", textvariable=mili_val)
 Entry_milisec.grid(column=6, row=0)
-ttk.Label(frm, text="Miliseconds").grid(column=7, row=0)
+ttk.Label(frm, text="Milliseconds").grid(column=7, row=0)
 #----------------------------------------------------------------------------------------------#
 
 frm_mouse = ttk.Labelframe(root, padding=10, text="Cursor position")
