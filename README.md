@@ -1,5 +1,8 @@
 # 🖱️ Fast Mouse - Auto Clicker
 
+<img width="1152" height="777" alt="Animação" src="https://github.com/user-attachments/assets/edaa68e4-9b49-4a72-bf53-6ec84b02756d" />
+
+
 > Auto Clicker made in Python with the help of AI.
 
 A simple, lightweight, and functional Auto Clicker application. This project marked my transition from creating sequential automation scripts to developing a complete software with a Graphical User Interface (GUI) and concurrent execution.
